@@ -1,15 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { FirestoreProvider } from "react-firestore";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { firebase } from "./firebase";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { CssBaseline } from '@material-ui/core';
+import store from './store/store';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
+// check https://www.npmjs.com/package/react-firestore#firestoreprovider
 ReactDOM.render(
-  <FirestoreProvider firebase={firebase}>
-    <App />
-  </FirestoreProvider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <CssBaseline />
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
