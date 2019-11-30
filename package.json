@@ -39,13 +39,20 @@
     "devDependencies": {
         "eslint-plugin-prettier": "^3.1.1",
         "husky": "^3.1.0",
+        "lint-staged": "^9.5.0",
         "prettier": "^1.19.1",
         "prettierrc": "0.0.0-5",
         "pretty-quick": "^2.0.1"
     },
+    "lint-staged": {
+        "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+            "pretty-quick --staged",
+            "git add"
+        ]
+    },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && pretty-quick --staged"
+            "pre-commit": "lint-staged"
         }
     }
 }
