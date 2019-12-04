@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
 import store from './store/store';
-import App from './App';
+import Main from './containers/Main';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
+import { ThemeProvider } from '@material-ui/styles';
+import theme from './theme';
 
-// check https://www.npmjs.com/package/react-firestore#firestoreprovider
 ReactDOM.render(
     <Provider store={store}>
-        <CssBaseline />
-        <App />
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Main />
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );
