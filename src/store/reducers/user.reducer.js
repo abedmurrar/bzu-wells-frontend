@@ -1,4 +1,10 @@
-import { USER_LOGIN_SUCCESSFUL, USER_LOGIN_FAIL, USER_LOADING } from '../types';
+import {
+    USER_LOGIN_SUCCESSFUL,
+    USER_LOGIN_FAIL,
+    USER_LOADING,
+    USER_LOGOUT_SUCCESSFUL,
+    USER_LOGOUT_FAIL,
+} from '../types';
 
 const initialState = {
     profile: {},
@@ -19,6 +25,7 @@ export default function(state = initialState, action) {
         case USER_LOGIN_FAIL:
             return {
                 ...state,
+                isLogged: false,
                 loading: false,
                 error: action.payload,
             };
@@ -28,6 +35,15 @@ export default function(state = initialState, action) {
                 error: null,
                 loading: true,
             };
+        case USER_LOGOUT_FAIL:
+            return {
+                ...state,
+                error: action.payload,
+                isLogged: false,
+                loading: false,
+            };
+        case USER_LOGOUT_SUCCESSFUL:
+            return initialState;
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import {
     GET_ONE_WELL_FAIL,
     GET_ONE_WELL_READING_FAIL,
     ONE_WELL_LOADING,
+    USER_LOGOUT_SUCCESSFUL,
 } from '../types';
 
 const initialState = {
@@ -42,6 +43,8 @@ export default function(state = initialState, action) {
                 error: null,
                 loading: true,
             };
+        case USER_LOGOUT_SUCCESSFUL:
+            return initialState;
         default:
             return state;
     }

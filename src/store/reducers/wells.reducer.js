@@ -1,4 +1,9 @@
-import { GET_WELLS_SUCCESSFUL, GET_WELLS_FAIL, WELLS_LOADING } from '../types';
+import {
+    GET_WELLS_SUCCESSFUL,
+    GET_WELLS_FAIL,
+    WELLS_LOADING,
+    USER_LOGOUT_SUCCESSFUL,
+} from '../types';
 
 const initialState = {
     list: [],
@@ -12,7 +17,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 error: null,
-                loading: true,
+                loading: false,
                 list: action.payload,
             };
         case GET_WELLS_FAIL:
@@ -27,6 +32,8 @@ export default function(state = initialState, action) {
                 loading: true,
                 error: null,
             };
+        case USER_LOGOUT_SUCCESSFUL:
+            return initialState;
         default:
             return state;
     }
