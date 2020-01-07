@@ -7,7 +7,12 @@ import {
     Card,
     CardContent,
     CardActions,
+    CardHeader,
+    Typography,
 } from '@material-ui/core';
+import { login } from '../store/actions/user.actions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 const styles = theme => ({
     root: {
@@ -30,6 +35,7 @@ class Login extends Component {
         };
         /** Binding fucntion */
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInputChange(event) {
@@ -41,6 +47,10 @@ class Login extends Component {
         });
     }
 
+    handleSubmit() {
+        this.props._login(this.state.username, this.state.password);
+    }
+
     render() {
         const {
             classes,
@@ -49,11 +59,15 @@ class Login extends Component {
         } = this.props;
 
         return (
-            <Grid classes={{ root: classes.root }}>
-                <Card>
+            <Grid item xs={11} sm={10} md={6}>
+                <Card style={{ padding: '10px' }}>
+                    <CardHeader
+                        title={<Typography variant="h2">Login</Typography>}
+                    />
                     <CardContent>
                         <TextField
                             // id="filled-full-width"
+                            name="username"
                             label="Username"
                             style={{ margin: 8 }}
                             // placeholder=""
@@ -65,6 +79,7 @@ class Login extends Component {
                         />
                         <TextField
                             // id="filled-full-width"
+                            name="password"
                             label="Password"
                             type="password"
                             style={{ margin: 8 }}
@@ -77,7 +92,7 @@ class Login extends Component {
                         />
                     </CardContent>
                     <CardActions>
-                        <Button>Login</Button>
+                        <Button onClick={this.handleSubmit}>Login</Button>
                     </CardActions>
                 </Card>
             </Grid>
@@ -85,4 +100,15 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(Login);
+const mapDispatchToProps = dispatch => {
+    return {
+        _login: (username, password) => {
+            dispatch(login(username, password));
+        },
+    };
+};
+
+export default compose(
+    connect(null, mapDispatchToProps),
+    withStyles(styles)
+)(Login);
