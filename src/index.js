@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 import store from './store/store';
-import Main from './containers/Main';
+import { Main } from './components';
+import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import { ThemeProvider } from '@material-ui/styles';
-import theme from './theme';
 
 ReactDOM.render(
     <Provider store={store}>

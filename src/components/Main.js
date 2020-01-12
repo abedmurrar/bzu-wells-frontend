@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Container, withStyles, Grid } from '@material-ui/core';
-import { Header, Login, WellsList } from '../components';
+import { Header, Login, WellsList } from './index';
 import { getWells } from '../store/actions/wells.actions';
 
 const styles = theme => ({
