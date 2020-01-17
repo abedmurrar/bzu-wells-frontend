@@ -5,6 +5,8 @@ import {
     USER_LOGIN_SUCCESSFUL,
     USER_LOGOUT_SUCCESSFUL,
     USER_LOGOUT_FAIL,
+    USER_LOAD_SESSION_SUCCESSFUL,
+    USER_LOAD_SESSION_FAIL,
 } from '../types';
 
 export const login = (username, password) => dispatch => {
@@ -49,5 +51,19 @@ export const logout = () => dispatch => {
                 type: USER_LOGOUT_FAIL,
                 payload: err,
             })
+        );
+};
+
+export const getSession = () => dispatch => {
+    dispatch({
+        type: USER_LOADING,
+        payload: null,
+    });
+    api.get('/users/session')
+        .then(res =>
+            dispatch({ type: USER_LOAD_SESSION_SUCCESSFUL, payload: res.data })
+        )
+        .catch(err =>
+            dispatch({ type: USER_LOAD_SESSION_FAIL, payload: null })
         );
 };
