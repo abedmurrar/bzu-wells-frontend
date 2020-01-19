@@ -23,18 +23,24 @@ class Main extends Component {
         this.props.findSession();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.user.isLogged !== this.props.user.isLogged) {
+    componentDidUpdate(prevProps) {
+        const {
+            user: { isLogged },
+        } = this.props;
+        const {
+            user: { isLogged: wasLogged },
+        } = prevProps;
+        if (wasLogged !== isLogged && isLogged) {
             this.props.loadWells();
         }
     }
 
     render() {
-        const { user, classes, wells } = this.props;
+        const { user, classes, wells, loader } = this.props;
         return (
             <Fragment>
-                <Loading isLoading />
-                <Header isAuthenticated={user.isLogged} />
+                <Loading isLoading={loader.isLoading} />
+                <Header user={user} />
                 <Container classes={{ root: classes.containerRoot }}>
                     <Grid
                         container
@@ -56,6 +62,7 @@ const mapStateToProps = state => ({
     well: state.well,
     user: state.user,
     wells: state.wells,
+    loader: state.loader,
 });
 
 const mapDispatchToProps = dispatch => ({
