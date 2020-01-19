@@ -1,6 +1,7 @@
 import api from './api';
 import {
-    USER_LOADING,
+    START_LOADING,
+    STOP_LOADING,
     USER_LOGIN_FAIL,
     USER_LOGIN_SUCCESSFUL,
     USER_LOGOUT_SUCCESSFUL,
@@ -11,7 +12,7 @@ import {
 
 export const login = (username, password) => dispatch => {
     dispatch({
-        type: USER_LOADING,
+        type: START_LOADING,
         payload: null,
     });
 
@@ -30,12 +31,18 @@ export const login = (username, password) => dispatch => {
                 type: USER_LOGIN_FAIL,
                 payload: err,
             })
+        )
+        .finally(() =>
+            dispatch({
+                type: STOP_LOADING,
+                payload: null,
+            })
         );
 };
 
 export const logout = () => dispatch => {
     dispatch({
-        type: USER_LOADING,
+        type: START_LOADING,
         payload: null,
     });
 
@@ -51,19 +58,29 @@ export const logout = () => dispatch => {
                 type: USER_LOGOUT_FAIL,
                 payload: err,
             })
+        )
+        .finally(() =>
+            dispatch({
+                type: STOP_LOADING,
+                payload: null,
+            })
         );
 };
 
 export const getSession = () => dispatch => {
     dispatch({
-        type: USER_LOADING,
+        type: START_LOADING,
         payload: null,
     });
     api.get('/users/session')
         .then(res =>
             dispatch({ type: USER_LOAD_SESSION_SUCCESSFUL, payload: res.data })
         )
-        .catch(err =>
-            dispatch({ type: USER_LOAD_SESSION_FAIL, payload: null })
+        .catch(err => dispatch({ type: USER_LOAD_SESSION_FAIL, payload: null }))
+        .finally(() =>
+            dispatch({
+                type: STOP_LOADING,
+                payload: null,
+            })
         );
 };

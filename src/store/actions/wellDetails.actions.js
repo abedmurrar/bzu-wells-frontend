@@ -4,12 +4,13 @@ import {
     GET_ONE_WELL_READINGS_SUCCESSFUL,
     GET_ONE_WELL_FAIL,
     GET_ONE_WELL_READING_FAIL,
-    ONE_WELL_LOADING,
+    START_LOADING,
+    STOP_LOADING,
 } from '../types';
 
 export const getWellDetailsById = id => dispatch => {
     dispatch({
-        type: ONE_WELL_LOADING,
+        type: START_LOADING,
         payload: null,
     });
 
@@ -26,12 +27,18 @@ export const getWellDetailsById = id => dispatch => {
                 type: GET_ONE_WELL_FAIL,
                 payload: err,
             })
+        )
+        .finally(() =>
+            dispatch({
+                type: STOP_LOADING,
+                payload: null,
+            })
         );
 };
 
 export const getWellReadingsById = (id, from, to) => dispatch => {
     dispatch({
-        type: ONE_WELL_LOADING,
+        type: START_LOADING,
         payload: null,
     });
     return api
@@ -46,6 +53,12 @@ export const getWellReadingsById = (id, from, to) => dispatch => {
             dispatch({
                 type: GET_ONE_WELL_READING_FAIL,
                 payload: err,
+            })
+        )
+        .finally(() =>
+            dispatch({
+                type: STOP_LOADING,
+                payload: null,
             })
         );
 };

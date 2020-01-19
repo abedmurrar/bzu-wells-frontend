@@ -3,7 +3,6 @@ import {
     GET_ONE_WELL_READINGS_SUCCESSFUL,
     GET_ONE_WELL_FAIL,
     GET_ONE_WELL_READING_FAIL,
-    ONE_WELL_LOADING,
     USER_LOGOUT_SUCCESSFUL,
 } from '../types';
 
@@ -11,7 +10,6 @@ const initialState = {
     details: {},
     readings: [],
     error: null,
-    loading: false,
 };
 
 export default function(state = initialState, action) {
@@ -20,28 +18,19 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 error: null,
-                loading: false,
                 details: action.payload,
             };
         case GET_ONE_WELL_READINGS_SUCCESSFUL:
             return {
                 ...state,
                 error: null,
-                loading: false,
                 readings: action.payload,
             };
         case GET_ONE_WELL_FAIL:
         case GET_ONE_WELL_READING_FAIL:
             return {
                 ...state,
-                loading: false,
                 error: action.payload,
-            };
-        case ONE_WELL_LOADING:
-            return {
-                ...state,
-                error: null,
-                loading: true,
             };
         case USER_LOGOUT_SUCCESSFUL:
             return initialState;

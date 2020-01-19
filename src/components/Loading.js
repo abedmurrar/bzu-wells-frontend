@@ -1,24 +1,20 @@
 import React from 'react';
-import { CircularProgress, withStyles } from '@material-ui/core';
+import { CircularProgress, Backdrop } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
-    loadingRoot: {
-        position: 'fixed',
-        zIndex: 123124135,
+const useStyles = makeStyles(theme => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
     },
-});
-const Loading = ({ isLoading, classes }) => (
-    <div className={classes.loadingRoot}>
-        <CircularProgress
-            style={{
-                transition: 'width 500ms, height 500ms',
-                height: isLoading ? '10%' : '0',
-                width: isLoading ? '10%' : '0',
-            }}
-            color="primary"
-            size={50}
-        />
-    </div>
-);
+}));
+const Loading = ({ isLoading }) => {
+    const classes = useStyles();
 
-export default withStyles(styles)(Loading);
+    return (
+        <Backdrop className={classes.backdrop} open={isLoading}>
+            <CircularProgress color="primary" size={100} />
+        </Backdrop>
+    );
+};
+
+export default Loading;
