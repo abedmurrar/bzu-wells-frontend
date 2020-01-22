@@ -30,7 +30,7 @@ const Header = props => {
                 <About />
                 {isAuthenticated && (
                     <UserMenu
-                        buttonText={`${first_name} ${last_name}`}
+                        userFullName={`${first_name} ${last_name}`}
                         _logout={_logout}
                     />
                 )}

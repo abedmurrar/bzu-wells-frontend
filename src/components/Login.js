@@ -53,7 +53,7 @@ class Login extends Component {
 
     render() {
         const {
-            classes,
+            // classes,
             usernameHelperText = '',
             passwordHelperText = '',
         } = this.props;
@@ -91,14 +91,22 @@ class Login extends Component {
                             onChange={this.handleInputChange}
                         />
                     </CardContent>
-                    <CardActions>
-                        <Button onClick={this.handleSubmit}>Login</Button>
+                    <CardActions style={{ justifyContent: 'flex-end' }}>
+                        <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={this.handleSubmit}
+                        >
+                            Login
+                        </Button>
                     </CardActions>
                 </Card>
             </Grid>
         );
     }
 }
+
+// TODO: Show errors
 
 const mapDispatchToProps = dispatch => {
     return {

@@ -1,10 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { Menu, MenuItem, IconButton } from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 export default function UserMenu(props) {
-    const { buttonText = 'Account', _logout } = props;
+    const { userFullName = 'Account', _logout } = props;
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -18,14 +17,15 @@ export default function UserMenu(props) {
 
     return (
         <div>
-            <Button
+            <IconButton
                 aria-controls="user-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
                 color="inherit"
+                aria-label="drop menu"
             >
-                {buttonText}
-            </Button>
+                <ArrowDropDownIcon />
+            </IconButton>
             <Menu
                 id="user-menu"
                 anchorEl={anchorEl}
@@ -33,6 +33,7 @@ export default function UserMenu(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
+                <MenuItem disabled>{userFullName}</MenuItem>
                 <MenuItem onClick={handleClose}>Change Password</MenuItem>
                 <MenuItem onClick={_logout}>Logout</MenuItem>
             </Menu>

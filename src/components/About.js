@@ -57,11 +57,7 @@ export default function AboutUsDialog() {
 
     return (
         <React.Fragment>
-            <Button
-                // variant="outlined"
-                color="inherit"
-                onClick={handleClickOpen}
-            >
+            <Button color="inherit" onClick={handleClickOpen}>
                 About
             </Button>
             <Dialog

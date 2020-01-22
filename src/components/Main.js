@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Container, withStyles, Grid } from '@material-ui/core';
 import { Header, Login, WellsList } from './index';
-import { getWells, getSession } from '../store/actions';
+import { getSession } from '../store/actions';
 import Loading from './Loading';
 
 const styles = theme => ({
@@ -23,20 +23,8 @@ class Main extends Component {
         this.props.findSession();
     }
 
-    componentDidUpdate(prevProps) {
-        const {
-            user: { isLogged },
-        } = this.props;
-        const {
-            user: { isLogged: wasLogged },
-        } = prevProps;
-        if (wasLogged !== isLogged && isLogged) {
-            this.props.loadWells();
-        }
-    }
-
     render() {
-        const { user, classes, wells, loader } = this.props;
+        const { user, classes, loader } = this.props;
         return (
             <Fragment>
                 <Loading isLoading={loader.isLoading} />
@@ -46,11 +34,7 @@ class Main extends Component {
                         container
                         classes={{ root: classes.gridContainerRoot }}
                     >
-                        {user.isLogged ? (
-                            <WellsList wells={wells} />
-                        ) : (
-                            <Login />
-                        )}
+                        {user.isLogged ? <WellsList /> : <Login />}
                     </Grid>
                 </Container>
             </Fragment>
@@ -59,14 +43,12 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-    well: state.well,
+    // well: state.well,
     user: state.user,
-    wells: state.wells,
     loader: state.loader,
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadWells: () => dispatch(getWells()),
     findSession: () => dispatch(getSession()),
 });
 
