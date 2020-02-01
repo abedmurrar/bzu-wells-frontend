@@ -72,7 +72,7 @@ export const getSession = () => dispatch => {
         type: START_LOADING,
         payload: null,
     });
-    api.get('/users/session')
+    api.get('/users/me')
         .then(res =>
             dispatch({ type: USER_LOAD_SESSION_SUCCESSFUL, payload: res.data })
         )
