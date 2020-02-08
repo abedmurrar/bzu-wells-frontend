@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const Well = props => {
     const {
-        well: { id, name, readings },
+        well: { id, name, volume, readings },
     } = props;
     const classes = useStyles();
     let day = 86400000;
@@ -44,13 +44,24 @@ const Well = props => {
                     {readings.length !== 0 ? (
                         <div>
                             {Date.now() - day >
-                                Date.parse(
-                                    readings[readings.length - 1].created_at
-                                ) && (
+                            Date.parse(
+                                readings[readings.length - 1].created_at
+                            ) ? (
                                 <Alert severity="warning" variant="filled">
                                     HAS NOT RECORDED A READING FOR MORE THAN ONE
                                     DAY.
-                                    <br /> PLEASE CHECK NODE {id}!
+                                    <br />
+                                    PLEASE CHECK NODE {id}!
+                                </Alert>
+                            ) : (
+                                <Alert severity="info" variant="filled">
+                                    {name} is now{' '}
+                                    {Math.round(
+                                        (readings[readings.length - 1].volume *
+                                            100) /
+                                            volume
+                                    )}
+                                    %
                                 </Alert>
                             )}
                             <WellGraph readings={readings} />

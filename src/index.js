@@ -6,6 +6,7 @@ import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import store from './store/store';
 import { Main } from './components';
+import Root from './routes';
 import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
@@ -14,7 +15,9 @@ ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Main />
+            <Main>
+                <Root />
+            </Main>
         </ThemeProvider>
     </Provider>,
     document.getElementById('root')

@@ -15,7 +15,7 @@ const CentimeterCubeFormatter = ({ value }) => (
             display: 'inline-block',
         }}
     >
-        {value} cm<sup>3</sup>
+        {value} m<sup>3</sup>
     </p>
 );
 

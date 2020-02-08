@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Container, withStyles, Grid } from '@material-ui/core';
-import { Header, Login, WellsList } from './index';
+import { Header } from './index';
 import { getSession } from '../store/actions';
 import Loading from './Loading';
 
@@ -24,7 +24,7 @@ class Main extends Component {
     }
 
     render() {
-        const { user, classes, loader } = this.props;
+        const { user, classes, loader, children } = this.props;
         return (
             <Fragment>
                 <Loading isLoading={loader.isLoading} />
@@ -34,7 +34,7 @@ class Main extends Component {
                         container
                         classes={{ root: classes.gridContainerRoot }}
                     >
-                        {user.isLogged ? <WellsList /> : <Login />}
+                        {children}
                     </Grid>
                 </Container>
             </Fragment>
@@ -43,7 +43,6 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-    // well: state.well,
     user: state.user,
     loader: state.loader,
 });
